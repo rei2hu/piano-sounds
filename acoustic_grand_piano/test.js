@@ -8,11 +8,12 @@ fs.readdir("./", (err, files) => {
     if (!/[0-9]/.test(file.slice(0, 2))) {
       const number = parseInt(file[2]);
       const tempfile = file;
-      const newnote = notes[(notes.indexOf(file[0]) + 6) % 7];
+      const newnote = notes[(notes.indexOf(file[0].toLowerCase()) + 6) % 7];
       file = newnote + "s" + (number + (newnote === "g" ? -1 : 0)) + ".mp3";
-      // console.log(tempfile, file);
+      // console.log(tempfile, file.toLowerCase());
       fs.renameSync(tempfile, file.toLowerCase());
     } else {
+      // console.log(file, file.toLowerCase());
       fs.renameSync(file, file.toLowerCase());
     }
   });
